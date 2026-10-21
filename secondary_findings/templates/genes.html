@@ -1,0 +1,10 @@
+<section id="genes" data-runhead="Список генов, входящих в программу профилактического ДНК-скрининга">
+  <h1>Список генов, входящих в программу профилактического <span class="nowrap">ДНК-скрининга</span></h1>
+  {% for g in gene_groups %}
+  <div class="group">
+    <h3>{{ g.title }}</h3>
+    {% for par in g.text %}<p>{{ par | safe }}</p>{% endfor %}
+    <p class="gene-list">Гены: {{ g.genes | join(", ") }}</p>
+  </div>
+  {% endfor %}
+</section>

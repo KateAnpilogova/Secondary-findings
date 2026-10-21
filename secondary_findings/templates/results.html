@@ -1,0 +1,77 @@
+{# ------------------------------------------------------------------
+   Страница результатов. Всё, что вносит специалист, приходит из
+   patient.json: variants (таблица), interpretation (абзацы),
+   recommendations (необязательно — иначе берутся стандартные),
+   references (только дополнительные источники для ссылок [@key] в интерпретации).
+   ------------------------------------------------------------------ #}
+<section class="results" id="results">
+  <div class="results-title">
+    Отчет<br>по результатам исследования генетических вариантов<br>на основе данных секвенирования ДНК
+  </div>
+
+  <h2>Результаты исследования</h2>
+  <div class="table-caption">Клинически значимые варианты в генах из списка ACMG*</div>
+
+  <table class="variants">
+    <colgroup>
+      <col class="c-gene"><col class="c-dis"><col class="c-dna">
+      <col class="c-zyg"><col class="c-frq"><col class="c-rd">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Ген</th>
+        <th>Ассоциированное заболевание (OMIM)</th>
+        <th>Изменение ДНК (GRCh38) (изменение белка)</th>
+        <th>Зиготность (тип наследования)</th>
+        <th>Частота**</th>
+        <th>Кол-во прочтений (альт./общ.)</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for v in patient.variants %}
+      <tr>
+        <td>
+          <span class="gene">{{ v.gene }}</span>
+          {% if v.classification %}<span class="cls">{{ v.classification }}</span>{% endif %}
+        </td>
+        <td>
+          {{ v.disease }}
+          {% if v.omim %}<span class="small">OMIM #{{ v.omim }}</span>{% endif %}
+        </td>
+        <td>
+          {{ v.position }}
+          <span class="small">{{ v.hgvs_c }}</span>
+          {% if v.hgvs_p %}({{ v.hgvs_p }}){% endif %}
+        </td>
+        <td>{{ v.zygosity }}<br>({{ v.inheritance }})</td>
+        <td>{{ v.frequency | freq }}</td>
+        <td>{{ v.reads_alt }}/{{ v.reads_total }}</td>
+      </tr>
+    {% else %}
+      <tr><td class="empty" colspan="6">Не обнаружено.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <div class="table-notes">
+    <p>*{{ study.acmg_version }} list for reporting of secondary findings in clinical exome and genome sequencing: A policy statement of the American College of Medical Genetics and Genomics (ACMG): <span class="genes">{{ acmg_genes | join(", ") }}</span>.</p>
+    <p>** {{ study.gnomad_note }}</p>
+    {% if inheritance_legend %}<p>{{ inheritance_legend }}</p>{% endif %}
+  </div>
+
+  <h2>Интерпретация вариантов</h2>
+  {% if patient.variants %}
+    {% for par in patient.interpretation %}<p>{{ par | safe }}</p>{% endfor %}
+  {% else %}
+    <p>Значимых изменений, соответствующих критериям поиска, не обнаружено.</p>
+  {% endif %}
+  <p>Оценка клинической значимости (патогенности) выявленных вариантов проводилась на основании российских и международных рекомендаций по интерпретации данных, полученных методами массового параллельного секвенирования (MPS).</p>
+  <p class="important">Результаты данного исследования могут быть правильно интерпретированы только врачом-генетиком.</p>
+
+  <div class="reco">
+    <div class="h">Рекомендации:</div>
+    <ol>
+      {% for r in recommendations %}<li>{{ r | safe }}</li>{% endfor %}
+    </ol>
+  </div>
+</section>

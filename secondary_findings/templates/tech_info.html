@@ -1,0 +1,22 @@
+<section id="tech" data-runhead="Техническая информация · Источники литературы">
+  <h1>Технические характеристики исследования</h1>
+  {% set t = study.tech %}
+  <table class="tech">
+    <tr><td class="k">Метод исследования:</td><td>{{ t.method }}</td></tr>
+    <tr><td class="k">Средняя глубина прочтения генома после секвенирования:</td><td>{{ patient.mean_depth }}</td></tr>
+    <tr><td class="k">Количество прочитанных нуклеотидов:</td><td>{{ t.bases }}</td></tr>
+    <tr><td class="k">Тип прочтения:</td><td>{{ t.read_type }}</td></tr>
+    <tr><td class="k">Длина прочтения:</td><td>{{ t.read_length }}</td></tr>
+    {% for q in t.quality %}
+    <tr>
+      {% if loop.first %}<td class="k" rowspan="{{ t.quality | length }}">Качество выходных данных секвенирования:</td>{% endif %}
+      <td>{{ loop.index }}. {{ q }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h1>Список литературы и баз данных</h1>
+  <ol class="refs">
+    {% for r in references %}<li>{{ r | safe }}</li>{% endfor %}
+  </ol>
+</section>
