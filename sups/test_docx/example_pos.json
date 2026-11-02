@@ -1,0 +1,44 @@
+{
+  "participant": "100003176",
+  "sex": "мужской",
+  "date": "20.10.2026",
+  "mean_depth": "36×",
+  "variants": [
+    {
+      "gene": "HFE",
+      "disease": "Гемохроматоз, тип 1",
+      "omim": "235200",
+      "position": "chr6:26092913 G>A",
+      "hgvs_c": "NM_000410.4:c.845G>A",
+      "hgvs_p": "p.Cys282Tyr",
+      "classification": null,
+      "zygosity": "гомозигота",
+      "inheritance": "АР",
+      "frequency": 0.0384,
+      "reads_alt": 38,
+      "reads_total": 38
+    },
+    {
+      "gene": "BRCA2",
+      "disease": "Рак молочной железы и яичников, наследственный, 2",
+      "omim": "612555",
+      "position": "chr13:32340300 GT>G",
+      "hgvs_c": "NM_000059.4:c.5946del",
+      "hgvs_p": "p.Ser1982ArgfsTer22",
+      "classification": null,
+      "zygosity": "гетерозигота",
+      "inheritance": "АД",
+      "frequency": 3.2e-05,
+      "reads_alt": 21,
+      "reads_total": 40
+    }
+  ],
+  "interpretation": [
+    "В гене <i>HFE</i> выявлен вариант c.845G&gt;A (p.Cys282Tyr) в гомозиготном состоянии. Вариант классифицирован как патогенный [4]. Функциональными исследованиями показано нарушение связывания с β2-микроглобулином [@ref12].",
+    "В гене <i>BRCA2</i> выявлен вариант c.5946del в гетерозиготном состоянии [@ref12; @ref13]."
+  ],
+  "references": {
+    "ref12": "Feder JN, et al. The hemochromatosis founder mutation in HLA-H disrupts β2-microglobulin interaction. J Biol Chem. 1997;272(22):14025-14028.",
+    "ref13": "Example A, et al. Functional study of BRCA2 c.5946del. Some J. 2020;1:1-2."
+  }
+}

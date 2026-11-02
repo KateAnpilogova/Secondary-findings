@@ -1,0 +1,12 @@
+# Генератор отчета «Профилактический ДНК-скрининг» (render.py)
+# Python >= 3.10 (требование WeasyPrint); проверено на Python 3.12
+#
+# WeasyPrint также требует системные библиотеки Pango и HarfBuzz:
+#   macOS:          brew install pango
+#   Debian/Ubuntu:  apt install libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz0b
+# Шрифты ставить не нужно — лежат в styles/fonts/.
+
+weasyprint==69.0
+jinja2==3.1.4
+
+
